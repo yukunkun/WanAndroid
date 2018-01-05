@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_marginTop="70dp"
+                android:id="@+id/scrollview"
+                android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="大家都在搜"
+                      android:textSize="18sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/color_2e4eef"
+                      android:layout_marginLeft="10dp"
+                      android:gravity="center_vertical"
+                      android:layout_height="45dp"/>
+            <View android:layout_height="0.5dp"
+                  android:background="@color/color_eaeaea"
+                  android:layout_width="match_parent"/>
+            <com.yukunkun.wanandroid.views.TagLayout android:layout_width="match_parent"
+                                                     android:id="@+id/taglayout"
+                                                     android:layout_height="wrap_content">
+
+            </com.yukunkun.wanandroid.views.TagLayout>
+            <View android:layout_height="0.5dp"
+                  android:background="@color/color_eaeaea"
+                  android:layout_width="match_parent"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="常用网站"
+                      android:textSize="18sp"
+                      android:textStyle="bold"
+                      android:textColor="@color/color_2e4eef"
+                      android:layout_marginLeft="10dp"
+                      android:gravity="center_vertical"
+                      android:layout_height="45dp"/>
+            <View android:layout_height="0.5dp"
+                  android:background="@color/color_eaeaea"
+                  android:layout_width="match_parent"/>
+            <com.yukunkun.wanandroid.views.NoScrolledListView android:layout_width="match_parent"
+                      android:id="@+id/listview"
+                      android:focusable="false"
+                      android:layout_height="match_parent">
+            </com.yukunkun.wanandroid.views.NoScrolledListView>
+        </LinearLayout>
+    </ScrollView>
+    <!--底部-->
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        <View android:layout_height="20dp"
+              android:background="@color/colorPrimary"
+              android:layout_width="match_parent"/>
+        <RelativeLayout android:layout_width="match_parent"
+                        android:background="@color/colorPrimary"
+                        android:layout_height="50dp">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="18sp"
+                      android:textColor="@color/color_write"
+                      android:text="热门"
+                      android:gravity="center"
+                      android:layout_centerInParent="true"
+                      android:layout_height="match_parent"/>
+            <ImageView android:layout_width="40dp"
+                       android:id="@+id/iv_search"
+                       android:src="@mipmap/search"
+                       android:layout_marginTop="0dp"
+                       android:layout_centerVertical="true"
+                       android:padding="10dp"
+                       android:layout_alignParentRight="true"
+                       android:layout_height="match_parent"/>
+            <ImageView android:layout_width="40dp"
+                       android:id="@+id/iv_me"
+                       android:src="@mipmap/me_icon"
+                       android:layout_marginTop="0dp"
+                       android:layout_centerVertical="true"
+                       android:padding="8dp"
+                       android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
