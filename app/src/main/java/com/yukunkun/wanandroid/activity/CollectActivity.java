@@ -1,6 +1,7 @@
 package com.yukunkun.wanandroid.activity;
 import android.content.SharedPreferences;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
+import com.yukunkun.wanandroid.adapter.CollectAdapter;
 import com.yukunkun.wanandroid.base.BaseActivity;
 import com.yukunkun.wanandroid.common.Constanct;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -28,7 +30,7 @@ public class CollectActivity extends BaseActivity {
     RecyclerView mRecyclerview;
     @BindView(R.id.sw)
     SwipeRefreshLayout mSw;
-    String cook="loginUserName=yukunkun; loginUserPassword=123456789ykk; JSESSIONID=45B8F78EFC5DA418267D0FC5923C3C98;";
+    private CollectAdapter mCollectAdapter;
 
     @Override
     public int getLayout() {
@@ -37,7 +39,21 @@ public class CollectActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        mRecyclerview.setLayoutManager(layoutManager);
+//        mCollectAdapter = new CollectAdapter();
+//        mRecyclerview.setAdapter(mCollectAdapter);
         getCollectInfo();
+        setListener();
+    }
+
+    private void setListener() {
+        mSw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSw.setRefreshing(false);
+            }
+        });
     }
 
     private void getCollectInfo() {
