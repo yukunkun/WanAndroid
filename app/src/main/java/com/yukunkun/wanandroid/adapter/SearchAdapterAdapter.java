@@ -98,7 +98,7 @@ public class SearchAdapterAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         public void onResponse(String response, int id) {
                                             ToastUtils.showToast("收藏成功");
                                             mFeedInfos.get(position).setCollect(true);
-                                            ((IndexAdapter.MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
+                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
                                         }
                                     });
                         }else {
@@ -116,7 +116,7 @@ public class SearchAdapterAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         public void onResponse(String response, int id) {
                                             ToastUtils.showToast("取消收藏");
                                             mFeedInfos.get(position).setCollect(false);
-                                            ((IndexAdapter.MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
+                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
 
                                         }
                                     });
