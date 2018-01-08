@@ -1,5 +1,6 @@
 package com.yukunkun.wanandroid.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.yukunkun.wanandroid.enerty.UesrInfo;
 import com.yukunkun.wanandroid.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
+import com.zhy.http.okhttp.cookie.store.CookieStore;
+import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -29,6 +33,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.OkHttpClient;
 
 public class LoginActivity extends BaseActivity {
 
@@ -111,9 +118,35 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void saveNamePasword(UesrInfo uesrInfo) {
+        getCookiesStr();
         DataSupport.deleteAll(UesrInfo.class);
         uesrInfo.save();
         MyApp.uesrInfo=uesrInfo;
+    }
+
+    /**获取cookies*/
+    public  String getCookiesStr(){
+        String cookiesInfo = "";
+        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+        if (cookieJar instanceof CookieJarImpl) {
+            CookieStore cookieStore = ((CookieJarImpl) cookieJar).getCookieStore();
+            List<Cookie> cookies = cookieStore.getCookies();
+            Log.i("cookies",cookies.toString());
+            for(Cookie cookie : cookies){
+                cookiesInfo = cookiesInfo + cookie.name() + "=" + cookie.value() + ";";
+                Log.i("cookie",cookiesInfo);
+//                saveToPre(cookiesInfo);
+                saveToPre(cookies.get(0).toString());
+            }
+        }
+        return cookiesInfo;
+    }
+
+    private void saveToPre(String cookiesInfo) {
+        SharedPreferences cookie = getSharedPreferences("cookie", MODE_PRIVATE);
+        SharedPreferences.Editor edit = cookie.edit();
+        edit.putString("cookie",cookiesInfo);
+        edit.commit();
     }
 
     private void newJoin() {
@@ -134,7 +167,6 @@ public class LoginActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.i("-",response);
                             try {
                                 JSONObject jsonObject=new JSONObject(response);
                                 String s = jsonObject.optString("errorMsg");
@@ -147,7 +179,6 @@ public class LoginActivity extends BaseActivity {
                                     saveNamePasword(uesrInfo);
                                     ToastUtils.showToast("注册成功");
                                     EventBus.getDefault().post(new EventLoginType(1));
-                                    Log.i("-",uesrInfo.toString());
                                     finish();
                                 }
                             } catch (JSONException e1) {

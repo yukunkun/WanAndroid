@@ -81,6 +81,7 @@ public class IndexFragment extends BaseFragment {
         OkHttpUtils.get().url(Constanct.FEEDURL+page+"/json").build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                Log.i("---",e.toString());
                 ToastUtils.showToast("请求错误！");
             }
 

@@ -1,4 +1,5 @@
 package com.yukunkun.wanandroid.activity;
+import android.content.SharedPreferences;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,10 +12,11 @@ import com.yukunkun.wanandroid.base.BaseActivity;
 import com.yukunkun.wanandroid.common.Constanct;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+
+
 
 public class CollectActivity extends BaseActivity {
 
@@ -26,6 +28,7 @@ public class CollectActivity extends BaseActivity {
     RecyclerView mRecyclerview;
     @BindView(R.id.sw)
     SwipeRefreshLayout mSw;
+    String cook="loginUserName=yukunkun; loginUserPassword=123456789ykk; JSESSIONID=45B8F78EFC5DA418267D0FC5923C3C98;";
 
     @Override
     public int getLayout() {
@@ -38,11 +41,12 @@ public class CollectActivity extends BaseActivity {
     }
 
     private void getCollectInfo() {
-        Log.i("name",MyApp.getUesrInfo().getUsername());
-        Log.i("pass",MyApp.getUesrInfo().getPassword());
+        SharedPreferences pref = getSharedPreferences("cookie",MODE_PRIVATE);
+        String cookie = pref.getString("cookie","");//第二个参数为默认值
+        Log.i("cookie",cookie);
+
         OkHttpUtils.get().url(Constanct.COLLECTLIST)
-                .addHeader("loginUserName", MyApp.getUesrInfo().getUsername())
-                .addHeader("loginUserPassword",MyApp.getUesrInfo().getPassword())
+                .addHeader("Cookie", cookie)
                 .build()
                 .execute(new StringCallback() {
                     @Override

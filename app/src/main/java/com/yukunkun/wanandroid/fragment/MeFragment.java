@@ -2,6 +2,7 @@ package com.yukunkun.wanandroid.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -108,7 +109,6 @@ public class MeFragment extends BaseFragment {
                 } else {
                     ActivityUtils.startCollectActivity(getContext());
                 }
-
                 break;
             case R.id.rl_adoutus:
                 AboutUsFragment aboutUsFragment = new AboutUsFragment();
@@ -120,6 +120,9 @@ public class MeFragment extends BaseFragment {
                 } else {
                     DataSupport.deleteAll(UesrInfo.class);
                     MyApp.uesrInfo = null;
+                    SharedPreferences.Editor editor = getContext().getSharedPreferences("cookie",Context.MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.commit();
                     ((Activity) getContext()).finish();
                 }
                 break;

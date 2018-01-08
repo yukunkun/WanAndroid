@@ -1,6 +1,7 @@
 package com.yukunkun.wanandroid.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,8 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by yukun on 18-1-4.
@@ -76,9 +79,13 @@ public class KnowledgeListAdapter extends RecyclerView.Adapter<RecyclerView.View
                     if(MyApp.getUesrInfo()==null){
                         ActivityUtils.startLoginActivity(mContext);
                     }else {
+                        SharedPreferences pref = mContext.getSharedPreferences("cookie",MODE_PRIVATE);
+                        String cookie = pref.getString("cookie","");//第二个参数为默认值
                         if(!datasBean.isCollect()){
-                            OkHttpUtils.post().url(Constanct.COLLECTURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.getUesrInfo().getUsername())
-                                    .addHeader("loginUserPassword",MyApp.getUesrInfo().getPassword()).build()
+                            OkHttpUtils.post()
+                                    .url(Constanct.COLLECTURL+datasBean.getId()+"/json")
+                                    .addHeader("Cookie",cookie)
+                                    .build()
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onError(Call call, Exception e, int id) {
@@ -89,12 +96,14 @@ public class KnowledgeListAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         public void onResponse(String response, int id) {
                                             ToastUtils.showToast("收藏成功");
                                             mFeedInfos.get(position).setCollect(true);
-                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
+                                            ((IndexAdapter.MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
                                         }
                                     });
                         }else {
-                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.uesrInfo.getUsername())
-                                    .addHeader("loginUserPassword",MyApp.uesrInfo.getPassword()).build()
+                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json")
+                                    .addHeader("Cookie",cookie)
+                                    .addParams("originId",datasBean.getId()+"")
+                                    .build()
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onError(Call call, Exception e, int id) {
@@ -105,7 +114,7 @@ public class KnowledgeListAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         public void onResponse(String response, int id) {
                                             ToastUtils.showToast("取消收藏");
                                             mFeedInfos.get(position).setCollect(false);
-                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
+                                            ((IndexAdapter.MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
 
                                         }
                                     });
