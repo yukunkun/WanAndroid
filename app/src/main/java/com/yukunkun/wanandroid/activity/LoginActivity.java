@@ -21,6 +21,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,17 +84,17 @@ public class LoginActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.i("res",response);
+                            Log.i("userinfo",response);
                             try {
                                 JSONObject jsonObject=new JSONObject(response);
                                 String s = jsonObject.optString("errorMsg");
                                 if(jsonObject.optString("errorCode").equals("-1")){
                                     ToastUtils.showToast(s);
                                 }else {
+                                    String data = jsonObject.optString("data");
                                     //save
                                     Gson gson=new Gson();
-                                    UesrInfo uesrInfo = gson.fromJson(response, UesrInfo.class);
-                                    Log.i("uesrInfo",uesrInfo.toString());
+                                    UesrInfo uesrInfo = gson.fromJson(data, UesrInfo.class);
                                     saveNamePasword(uesrInfo);
                                     ToastUtils.showToast("登录成功");
                                     EventBus.getDefault().post(new EventLoginType(1));
@@ -108,7 +111,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void saveNamePasword(UesrInfo uesrInfo) {
-        MyApp.setUesrInfo(uesrInfo);
+        DataSupport.deleteAll(UesrInfo.class);
+        uesrInfo.save();
+        MyApp.uesrInfo=uesrInfo;
     }
 
     private void newJoin() {

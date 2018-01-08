@@ -101,6 +101,7 @@
                         android:layout_height="50dp">
             <TextView android:layout_width="wrap_content"
                       android:textSize="18sp"
+                      android:id="@+id/tv_name"
                       android:textColor="@color/color_write"
                       android:text="我的"
                       android:gravity="center"
@@ -110,10 +111,7 @@
                        android:id="@+id/iv_back"
                        android:src="@mipmap/icon_back"
                        android:padding="8dp"
-                       android:layout_marginLeft="10dp"
                        android:layout_height="match_parent"/>
-
-
         </RelativeLayout>
     </LinearLayout>
 

@@ -14,4 +14,6 @@ public class Constanct {
     public static String SEARCH="http://www.wanandroid.com/article/query/";
     public static String COLLECTURL="http://www.wanandroid.com/lg/collect/";
     public static String CANCELCOLURL="http://www.wanandroid.com/lg/uncollect/";
+    public static String COLLECTLIST="http://www.wanandroid.com/lg/collect/usertools/json";
+    public static String KNOWLEDGELISTURL="http://www.wanandroid.com/article/list/";
 }

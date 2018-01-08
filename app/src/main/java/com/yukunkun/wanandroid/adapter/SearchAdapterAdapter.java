@@ -79,8 +79,8 @@ public class SearchAdapterAdapter extends RecyclerView.Adapter<RecyclerView.View
                         ActivityUtils.startLoginActivity(mContext);
                     }else {
                         if(!datasBean.isCollect()){
-                            OkHttpUtils.post().url(Constanct.COLLECTURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.getUesrInfo().getData().getUsername())
-                                    .addHeader("loginUserPassword",MyApp.getUesrInfo().getData().getPassword()).build()
+                            OkHttpUtils.post().url(Constanct.COLLECTURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.getUesrInfo().getUsername())
+                                    .addHeader("loginUserPassword",MyApp.getUesrInfo().getPassword()).build()
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onError(Call call, Exception e, int id) {
@@ -96,8 +96,8 @@ public class SearchAdapterAdapter extends RecyclerView.Adapter<RecyclerView.View
                                         }
                                     });
                         }else {
-                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.uesrInfo.getData().getUsername())
-                                    .addHeader("loginUserPassword",MyApp.uesrInfo.getData().getPassword()).build()
+                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json").addHeader("loginUserName",MyApp.uesrInfo.getUsername())
+                                    .addHeader("loginUserPassword",MyApp.uesrInfo.getPassword()).build()
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onError(Call call, Exception e, int id) {

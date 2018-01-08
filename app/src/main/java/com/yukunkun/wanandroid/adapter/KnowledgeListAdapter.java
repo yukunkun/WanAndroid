@@ -2,7 +2,6 @@ package com.yukunkun.wanandroid.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.common.Constanct;
 import com.yukunkun.wanandroid.enerty.FeedInfo;
+import com.yukunkun.wanandroid.enerty.KnowledgeListInfo;
 import com.yukunkun.wanandroid.utils.ActivityUtils;
 import com.yukunkun.wanandroid.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -29,8 +29,8 @@ import okhttp3.Call;
  * Created by yukun on 18-1-4.
  */
 
-public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<FeedInfo> mFeedInfos ;
+public class KnowledgeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    List<KnowledgeListInfo.DataBean.DatasBean> mFeedInfos ;
     Context mContext;
     Random mRandom=new Random();
     Integer[] mList=new Integer[]{R.color.color_2b2b2b,R.color.color_2e4eef,R.color.colorPrimary,
@@ -38,7 +38,7 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             R.color.color_30f209,R.color.color_30f209};
 
 
-    public IndexAdapter(List<FeedInfo> feedInfos, Context context) {
+    public KnowledgeListAdapter(Context context,List<KnowledgeListInfo.DataBean.DatasBean> feedInfos) {
         mFeedInfos = feedInfos;
         mContext = context;
     }
@@ -52,7 +52,7 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof MyHolder){
-            final FeedInfo datasBean = mFeedInfos.get(position);
+            final KnowledgeListInfo.DataBean.DatasBean datasBean = mFeedInfos.get(position);
             ((MyHolder) holder).mTvName.setText(datasBean.getAuthor());
             ((MyHolder) holder).mTvContent.setText(datasBean.getTitle());
             ((MyHolder) holder).mTvTime.setText(datasBean.getNiceDate());

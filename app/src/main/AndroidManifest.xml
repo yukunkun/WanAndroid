@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MyApp"
@@ -33,6 +34,10 @@
         <activity android:name=".activity.DetailActivity">
         </activity>
         <activity android:name=".activity.SearchActivity">
+        </activity>
+        <activity android:name=".activity.CollectActivity">
+        </activity>
+        <activity android:name=".activity.KnowListActivity">
         </activity>
     </application>
 

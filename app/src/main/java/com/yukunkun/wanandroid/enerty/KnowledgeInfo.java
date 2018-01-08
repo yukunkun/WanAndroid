@@ -1,5 +1,6 @@
 package com.yukunkun.wanandroid.enerty;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class KnowledgeInfo {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         private int id;
         private String name;
         private int courseId;
@@ -140,7 +141,7 @@ public class KnowledgeInfo {
             this.children = children;
         }
 
-        public static class ChildrenBean {
+        public static class ChildrenBean implements Serializable{
             private int id;
             private String name;
             private int courseId;

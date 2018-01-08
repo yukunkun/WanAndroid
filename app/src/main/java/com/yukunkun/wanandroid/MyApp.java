@@ -21,23 +21,15 @@ public class MyApp extends LitePalApplication {
         return uesrInfo;
     }
 
-    public static void setUesrInfo(UesrInfo uesrInfo) {
-        MyApp.uesrInfo = uesrInfo;
-        List<UesrInfo> all = DataSupport.findAll(UesrInfo.class);
-        if(all.size()==0){
-            uesrInfo.save();
-        }
+    public static void setUesrInfo(UesrInfo userInfo) {
+        uesrInfo=new UesrInfo();
+        uesrInfo=userInfo;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         myApp=this;
-        List<UesrInfo> all = DataSupport.findAll(UesrInfo.class);
-        if(all.size()!=0){
-            MyApp.uesrInfo = all.get(0);
-        }
-        Log.i("---",uesrInfo.toString());
     }
 
     public static MyApp getMyApp() {

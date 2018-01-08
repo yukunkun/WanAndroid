@@ -21,7 +21,7 @@
                       android:gravity="center_vertical"
                       android:layout_height="45dp"/>
             <View android:layout_height="0.5dp"
-                  android:background="@color/color_eaeaea"
+                  android:background="@color/color_b1b1b1"
                   android:layout_width="match_parent"/>
             <com.yukunkun.wanandroid.views.TagLayout android:layout_width="match_parent"
                                                      android:id="@+id/taglayout"
@@ -40,11 +40,12 @@
                       android:gravity="center_vertical"
                       android:layout_height="45dp"/>
             <View android:layout_height="0.5dp"
-                  android:background="@color/color_eaeaea"
+                  android:background="@color/color_b1b1b1"
                   android:layout_width="match_parent"/>
             <com.yukunkun.wanandroid.views.NoScrolledListView android:layout_width="match_parent"
                       android:id="@+id/listview"
                       android:focusable="false"
+                      android:divider="@null"
                       android:layout_height="match_parent">
             </com.yukunkun.wanandroid.views.NoScrolledListView>
         </LinearLayout>

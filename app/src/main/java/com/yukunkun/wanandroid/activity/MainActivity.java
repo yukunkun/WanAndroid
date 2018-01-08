@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.base.BaseActivity;
@@ -104,10 +106,24 @@ public class MainActivity extends BaseActivity {
         lastPos = pos;
     }
 
+    //双击退出
+    private long firstTime=0;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime=System.currentTimeMillis();
+
+                if(secondTime-firstTime>2000){
+                    Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+                    firstTime=secondTime;
+                    return true;
+                }else{
+                    finish();
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

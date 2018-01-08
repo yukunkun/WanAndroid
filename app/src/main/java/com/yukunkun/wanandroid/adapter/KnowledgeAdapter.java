@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.enerty.KnowledgeInfo;
+import com.yukunkun.wanandroid.utils.ActivityUtils;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
-            KnowledgeInfo.DataBean dataBean = mFeedInfos.getData().get(position);
+            final KnowledgeInfo.DataBean dataBean = mFeedInfos.getData().get(position);
             ((MyHolder) holder).mTvTitle.setText(dataBean.getName());
             List<KnowledgeInfo.DataBean.ChildrenBean> children = dataBean.getChildren();
             String child="";
@@ -48,6 +49,12 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 child=child+children.get(i).getName()+" / ";
             }
             ((MyHolder) holder).mTvCatgroy.setText(child);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityUtils.startKnowListActivity(mContext,dataBean);
+                }
+            });
         }
     }
 

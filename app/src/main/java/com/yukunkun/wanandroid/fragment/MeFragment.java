@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,6 @@ import com.yukunkun.wanandroid.enerty.UesrInfo;
 import com.yukunkun.wanandroid.utils.ActivityUtils;
 
 import org.litepal.crud.DataSupport;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +44,10 @@ public class MeFragment extends BaseFragment {
     ImageView mIvBack;
     @BindView(R.id.tv_version)
     TextView mTvVersion;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
     private boolean isLogin;
+
     public static MeFragment getInstance(Context context) {
         return new MeFragment();
     }
@@ -59,23 +61,32 @@ public class MeFragment extends BaseFragment {
         this.isLogin = isLogin;
         if (!isLogin) {
             mTvLogin.setText("登录");
+            mTvName.setText("我的");
         } else {
             mTvLogin.setText("退出登录");
+            mTvName.setText(MyApp.getUesrInfo().getUsername());
         }
+
     }
 
     @Override
     public void initView(View inflate, Bundle savedInstanceState) {
         OverScrollDecoratorHelper.setUpOverScroll(mScrollview);
         //判断登录与否
-        if( MyApp.uesrInfo==null){
-            isLogin=false;
-        }else {
-            isLogin=true;
+        if (MyApp.getUesrInfo() == null) {
+            isLogin = false;
+        } else {
+            isLogin = true;
         }
+        if(MyApp.getUesrInfo()!=null){
+            Log.i("－－user",MyApp.getUesrInfo().toString());
+        }
+
         if (!isLogin) {
             mTvLogin.setText("登录");
+            mTvName.setText("我的");
         } else {
+            mTvName.setText(MyApp.getUesrInfo().getUsername());
             mTvLogin.setText("退出登录");
         }
         try {
@@ -92,23 +103,37 @@ public class MeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_collect:
+                if (!isLogin) {
+                    ActivityUtils.startLoginActivity(getContext());
+                } else {
+                    ActivityUtils.startCollectActivity(getContext());
+                }
+
                 break;
             case R.id.rl_adoutus:
-                AboutUsFragment aboutUsFragment=new AboutUsFragment();
-                aboutUsFragment.show(getChildFragmentManager(),"");
+                AboutUsFragment aboutUsFragment = new AboutUsFragment();
+                aboutUsFragment.show(getChildFragmentManager(), "");
                 break;
             case R.id.tv_login:
                 if (!isLogin) {
                     ActivityUtils.startLoginActivity(getContext());
                 } else {
                     DataSupport.deleteAll(UesrInfo.class);
-                    MyApp.uesrInfo=null;
-                    ((Activity)getContext()).finish();
+                    MyApp.uesrInfo = null;
+                    ((Activity) getContext()).finish();
                 }
                 break;
             case R.id.iv_back:
                 ((Activity) getContext()).finish();
                 break;
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 }

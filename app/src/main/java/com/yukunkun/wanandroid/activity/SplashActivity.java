@@ -2,6 +2,7 @@ package com.yukunkun.wanandroid.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -9,8 +10,12 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.base.BaseActivity;
+import com.yukunkun.wanandroid.enerty.UesrInfo;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,13 @@ public class SplashActivity extends BaseActivity {
 
         setAnimSet(mTvRemind,mIvBg);
         startMainActyivity();
+
+        List<UesrInfo> all = DataSupport.findAll(UesrInfo.class);
+        if(all.size()!=0){
+            MyApp.setUesrInfo(all.get(0));
+        }else {
+
+        }
     }
 
     /**
