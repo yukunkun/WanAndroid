@@ -14,10 +14,18 @@ import com.yukunkun.wanandroid.base.BaseActivity;
 import com.yukunkun.wanandroid.common.Constanct;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
-
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 
 
 public class CollectActivity extends BaseActivity {
@@ -30,7 +38,7 @@ public class CollectActivity extends BaseActivity {
     RecyclerView mRecyclerview;
     @BindView(R.id.sw)
     SwipeRefreshLayout mSw;
-    private CollectAdapter mCollectAdapter;
+
 
     @Override
     public int getLayout() {
@@ -56,18 +64,15 @@ public class CollectActivity extends BaseActivity {
         });
     }
 
-    private void getCollectInfo() {
-        SharedPreferences pref = getSharedPreferences("cookie",MODE_PRIVATE);
-        String cookie = pref.getString("cookie","");//第二个参数为默认值
-        Log.i("cookie",cookie);
 
-        OkHttpUtils.get().url(Constanct.COLLECTLIST)
-                .addHeader("Cookie", cookie)
+    private void getCollectInfo() {
+
+        OkHttpUtils.initClient(MyApp.getMyApp().getOkHttpCliet()).get().url(Constanct.COLLECTLIST)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        Log.i("res",e.toString());
                     }
 
                     @Override

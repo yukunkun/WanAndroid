@@ -81,12 +81,9 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     if(MyApp.getUesrInfo()==null){
                         ActivityUtils.startLoginActivity(mContext);
                     }else {
-                        SharedPreferences pref = mContext.getSharedPreferences("cookie",MODE_PRIVATE);
-                        String cookie = pref.getString("cookie","");//第二个参数为默认值
                         if(!datasBean.isCollect()){
-                            OkHttpUtils.post()
+                            OkHttpUtils.initClient(MyApp.getMyApp().getOkHttpCliet()).post()
                                     .url(Constanct.COLLECTURL+datasBean.getId()+"/json")
-                                    .addHeader("Cookie",cookie)
                                     .build()
                                     .execute(new StringCallback() {
                                         @Override
@@ -102,8 +99,7 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                                         }
                                     });
                         }else {
-                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json")
-                                    .addHeader("Cookie",cookie)
+                            OkHttpUtils.initClient(MyApp.getMyApp().getOkHttpCliet()).post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json")
                                     .addParams("originId",datasBean.getId()+"")
                                     .build()
                                     .execute(new StringCallback() {

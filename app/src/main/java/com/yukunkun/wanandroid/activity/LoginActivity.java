@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         if(mEtLoginName.getText().toString().length()>0&&mEtLoginPassword.getText().toString().length()>0){
-            OkHttpUtils.post().url(Constanct.LOGINURL).addParams("username",mEtLoginName.getText().toString()).addParams("password",mEtLoginPassword.getText().toString()).build()
+            OkHttpUtils.initClient(MyApp.getMyApp().getOkHttpCliet()).post().url(Constanct.LOGINURL).addParams("username",mEtLoginName.getText().toString()).addParams("password",mEtLoginPassword.getText().toString()).build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
@@ -134,9 +134,9 @@ public class LoginActivity extends BaseActivity {
             Log.i("cookies",cookies.toString());
             for(Cookie cookie : cookies){
                 cookiesInfo = cookiesInfo + cookie.name() + "=" + cookie.value() + ";";
-                Log.i("cookie",cookiesInfo);
-//                saveToPre(cookiesInfo);
-                saveToPre(cookies.get(0).toString());
+                Log.i("cookie",cookie.value());
+//                saveToPre(cookies.toString());
+                saveToPre(cookie.value());
             }
         }
         return cookiesInfo;
@@ -155,7 +155,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         if(mEtLoginName.getText().toString().length()>0&&mEtLoginPassword.getText().toString().length()>0&&mEtReloginPassword.getText().toString().length()>0){
-            OkHttpUtils.post().url(Constanct.ZHUCEURL)
+            OkHttpUtils.initClient(MyApp.getMyApp().getOkHttpCliet()).post().url(Constanct.ZHUCEURL)
                     .addParams("username",mEtLoginName.getText().toString())
                     .addParams("password",mEtLoginPassword.getText().toString()).
                     addParams("repassword",mEtReloginPassword.getText().toString()).build()
