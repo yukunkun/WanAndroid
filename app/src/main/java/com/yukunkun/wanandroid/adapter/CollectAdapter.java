@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.common.Constanct;
+import com.yukunkun.wanandroid.enerty.CollectInfo;
 import com.yukunkun.wanandroid.enerty.FeedInfo;
 import com.yukunkun.wanandroid.utils.ActivityUtils;
 import com.yukunkun.wanandroid.utils.ToastUtils;
@@ -33,7 +34,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<FeedInfo> mFeedInfos ;
+    List<CollectInfo> mFeedInfos ;
     Context mContext;
     Random mRandom=new Random();
     Integer[] mList=new Integer[]{R.color.color_2b2b2b,R.color.color_2e4eef,R.color.colorPrimary,
@@ -41,7 +42,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             R.color.color_30f209,R.color.color_30f209};
 
 
-    public CollectAdapter(List<FeedInfo> feedInfos, Context context) {
+    public CollectAdapter(List<CollectInfo> feedInfos, Context context) {
         mFeedInfos = feedInfos;
         mContext = context;
     }
@@ -55,72 +56,18 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if(holder instanceof MyHolder){
-            final FeedInfo datasBean = mFeedInfos.get(position);
+            final CollectInfo datasBean = mFeedInfos.get(position);
             ((MyHolder) holder).mTvName.setText(datasBean.getAuthor());
             ((MyHolder) holder).mTvContent.setText(datasBean.getTitle());
             ((MyHolder) holder).mTvTime.setText(datasBean.getNiceDate());
             ((MyHolder) holder).mTvClass.setText(datasBean.getChapterName());
             int pos = mRandom.nextInt(mList.length);
             ((MyHolder) holder).mTvName.setTextColor(mContext.getResources().getColor(mList[pos]));
-            if(datasBean.isCollect()){
-                ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
-            }else {
-                ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
-            }
+            ((MyHolder) holder).mIvCollect.setVisibility(View.GONE);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ActivityUtils.startDetaikActivity(mContext,datasBean.getLink(),datasBean.getTitle());
-                }
-            });
-            ((MyHolder) holder).mIvCollect.setOnClickListener(new View.OnClickListener() {
-
-
-                @Override
-                public void onClick(View v) {
-                    if(MyApp.getUesrInfo()==null){
-                        ActivityUtils.startLoginActivity(mContext);
-                    }else {
-                        SharedPreferences pref = mContext.getSharedPreferences("cookie",MODE_PRIVATE);
-                        String cookie = pref.getString("cookie","");//第二个参数为默认值
-                        if(!datasBean.isCollect()){
-                            OkHttpUtils.post()
-                                    .url(Constanct.COLLECTURL+datasBean.getId()+"/json")
-                                    .addHeader("Cookie",cookie)
-                                    .build()
-                                    .execute(new StringCallback() {
-                                        @Override
-                                        public void onError(Call call, Exception e, int id) {
-
-                                        }
-
-                                        @Override
-                                        public void onResponse(String response, int id) {
-                                            ToastUtils.showToast("收藏成功");
-                                            mFeedInfos.get(position).setCollect(true);
-                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection_fill);
-                                        }
-                                    });
-                        }else {
-                            OkHttpUtils.post().url(Constanct.CANCELCOLURL+datasBean.getId()+"/json")
-                                    .addHeader("Cookie",cookie)
-                                    .addParams("originId",datasBean.getId()+"")
-                                    .build()
-                                    .execute(new StringCallback() {
-                                        @Override
-                                        public void onError(Call call, Exception e, int id) {
-                                            Log.i("collect",e.toString());
-                                        }
-
-                                        @Override
-                                        public void onResponse(String response, int id) {
-                                            ToastUtils.showToast("取消收藏");
-                                            mFeedInfos.get(position).setCollect(false);
-                                            ((MyHolder) holder).mIvCollect.setImageResource(R.mipmap.collection);
-                                        }
-                                    });
-                        }
-                    }
                 }
             });
         }
