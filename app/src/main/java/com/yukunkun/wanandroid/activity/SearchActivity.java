@@ -14,7 +14,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yukunkun.wanandroid.R;
-import com.yukunkun.wanandroid.adapter.IndexAdapter;
 import com.yukunkun.wanandroid.adapter.SearchAdapterAdapter;
 import com.yukunkun.wanandroid.base.BaseActivity;
 import com.yukunkun.wanandroid.common.Constanct;
@@ -29,7 +28,6 @@ import java.util.List;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
@@ -39,7 +37,7 @@ public class SearchActivity extends BaseActivity {
     TextView mTvCancel;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-    @BindView(R.id.smartLayout)
+    @BindView(R.id.smart_layout)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.ed_text)
     EditText mEdText;
