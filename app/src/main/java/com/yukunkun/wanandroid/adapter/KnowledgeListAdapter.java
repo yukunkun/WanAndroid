@@ -1,8 +1,8 @@
 package com.yukunkun.wanandroid.adapter;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.common.Constanct;
-import com.yukunkun.wanandroid.enerty.FeedInfo;
 import com.yukunkun.wanandroid.enerty.KnowledgeListInfo;
 import com.yukunkun.wanandroid.utils.ActivityUtils;
 import com.yukunkun.wanandroid.utils.ToastUtils;
@@ -22,6 +21,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.List;
 import java.util.Random;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;

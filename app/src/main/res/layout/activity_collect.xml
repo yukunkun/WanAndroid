@@ -32,12 +32,12 @@
                    android:padding="8dp"
                    android:layout_height="match_parent"/>
     </RelativeLayout>
-    <android.support.v4.widget.SwipeRefreshLayout android:layout_width="match_parent"
+    <androidx.core.widget.SwipeRefreshLayout android:layout_width="match_parent"
                                                   android:id="@+id/sw"
                                                   android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
                                                 android:id="@+id/recyclerview"
                                                 android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.core.widget.SwipeRefreshLayout>
 </LinearLayout>

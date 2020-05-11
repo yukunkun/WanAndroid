@@ -34,16 +34,16 @@
                    android:layout_marginRight="10dp"
                    android:layout_height="match_parent"/>
     </RelativeLayout>
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout android:layout_width="match_parent"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:layout_width="match_parent"
                                                        android:id="@+id/smartLayout"
                                                        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:background="@color/color_write"
             android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

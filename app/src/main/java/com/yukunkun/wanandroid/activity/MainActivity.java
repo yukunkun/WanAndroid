@@ -2,10 +2,7 @@ package com.yukunkun.wanandroid.activity;
 
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -24,8 +21,10 @@ import com.yukunkun.wanandroid.views.BMoveView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.rg)

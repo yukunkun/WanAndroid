@@ -1,19 +1,19 @@
 package com.yukunkun.wanandroid.activity;
 import android.content.SharedPreferences;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.yukunkun.wanandroid.MyApp;
 import com.yukunkun.wanandroid.R;
 import com.yukunkun.wanandroid.adapter.CollectAdapter;
 import com.yukunkun.wanandroid.base.BaseActivity;
 import com.yukunkun.wanandroid.common.Constanct;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;

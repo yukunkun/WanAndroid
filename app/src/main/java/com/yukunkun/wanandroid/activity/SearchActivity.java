@@ -1,10 +1,6 @@
 package com.yukunkun.wanandroid.activity;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,12 +9,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
-import com.scwang.smartrefresh.header.DeliveryHeader;
-import com.scwang.smartrefresh.header.DropboxHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yukunkun.wanandroid.R;
@@ -34,6 +26,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

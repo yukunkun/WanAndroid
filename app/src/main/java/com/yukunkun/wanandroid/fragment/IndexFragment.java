@@ -1,23 +1,14 @@
 package com.yukunkun.wanandroid.fragment;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.DropBoxManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.textservice.TextInfo;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.yukunkun.wanandroid.R;
@@ -37,6 +28,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
