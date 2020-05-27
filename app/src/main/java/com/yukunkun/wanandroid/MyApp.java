@@ -39,6 +39,7 @@ public class MyApp extends LitePalApplication {
         uesrInfo=userInfo;
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();
